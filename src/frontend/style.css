@@ -1,0 +1,25 @@
+.gameItem {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 5px 10px 10px #eef5ee;
+    height: 222px;
+}
+
+.image-item {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.unmatched {
+    background-color: red;
+}
+
+#board {
+    justify-content: center;
+}
+
+#reset {
+    text-align: center;
+}
