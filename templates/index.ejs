@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('partials/head.ejs') %>
+
+        <style>
+            .gameItem {
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                box-shadow: 5px 10px 10px #eef5ee;
+                height: 100px;
+            }
+
+            .unmatched {
+                background-color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <main
+            class="container-fuild p-4"
+            style="
+                height: 100vh;
+                background-image: url('https://media.istockphoto.com/id/1445326229/photo/cardboard-tone-vintage-texture-background-cream-paper-old-grunge-retro-rustic-for-wall.jpg?b=1&s=170667a&w=0&k=20&c=Xu59z-A8V-jeBexUNUTOKbV3eFuWDO1IU-zMYCwCckk=');
+                background-repeat: no-repeat;
+                background-size: cover;
+            "
+        >
+            <header class="row"><%- include('partials/header.ejs') %></header>
+            <div id="app">
+                <section class="row">
+                    <div class="col-2 gameItem m-2 p-1 text-center">
+                        <img class="img-fluid" src="" alt="" />
+                    </div>
+                </section>
+                <section class="row">
+                    <div class="col" id="reset">
+                        <hr />
+                        <button class="btn btn-primary">Reset Game</button>
+                        <button class="btn btn-danger">Cancel Game</button>
+                    </div>
+                </section>
+            </div>
+            <footer class="row"><%- include('partials/footer.ejs') %></footer>
+        </main>
+        <%- include('partials/foot.ejs') %>
+    </body>
+</html>
