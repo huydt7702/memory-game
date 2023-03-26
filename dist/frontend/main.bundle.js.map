@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://mini_game/./src/frontend/App.ts"],"names":[],"mappings":";;;;;;;AAAa;AACb","file":"main.bundle.js","sourcesContent":["\"use strict\";\nconsole.log(\"Frontend\");\n"],"sourceRoot":""}
