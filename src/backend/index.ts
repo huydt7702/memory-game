@@ -18,5 +18,5 @@ app.get("/login", (req: Request, res: Response) => {
 });
 
 app.listen(3333, () => {
-    console.log(`Sever is running`);
+    console.log(`Sever is running on port 3333`);
 });
