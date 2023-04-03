@@ -11,12 +11,5 @@ export class GameItem {
         public status: GameItemStatus = GameItemStatus.Close,
         public isMatched: boolean = false,
         public imageElement: HTMLImageElement | null = null
-    ) {
-        this.id = id;
-        this.divId = divId;
-        this.image = image;
-        this.status = status;
-        this.isMatched = isMatched;
-        this.imageElement = imageElement;
-    }
+    ) {}
 }

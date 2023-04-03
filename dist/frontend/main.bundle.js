@@ -23,7 +23,7 @@
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".gameItem {\n    border: 1px solid #ddd;\n    border-radius: 5px;\n    box-shadow: 5px 10px 10px #eef5ee;\n    height: 222px;\n}\n\n.image-item {\n    object-fit: cover;\n    width: 100%;\n    height: 100%;\n    cursor: pointer;\n}\n\n.unmatched {\n    background-color: red;\n}\n\n#board {\n    justify-content: center;\n}\n\n#reset {\n    text-align: center;\n}\n", "",{"version":3,"sources":["webpack://./src/frontend/style.css"],"names":[],"mappings":"AAAA;IACI,sBAAsB;IACtB,kBAAkB;IAClB,iCAAiC;IACjC,aAAa;AACjB;;AAEA;IACI,iBAAiB;IACjB,WAAW;IACX,YAAY;IACZ,eAAe;AACnB;;AAEA;IACI,qBAAqB;AACzB;;AAEA;IACI,uBAAuB;AAC3B;;AAEA;IACI,kBAAkB;AACtB","sourcesContent":[".gameItem {\n    border: 1px solid #ddd;\n    border-radius: 5px;\n    box-shadow: 5px 10px 10px #eef5ee;\n    height: 222px;\n}\n\n.image-item {\n    object-fit: cover;\n    width: 100%;\n    height: 100%;\n    cursor: pointer;\n}\n\n.unmatched {\n    background-color: red;\n}\n\n#board {\n    justify-content: center;\n}\n\n#reset {\n    text-align: center;\n}\n"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, ".gameItem {\n    border: 1px solid #ddd;\n    border-radius: 5px;\n    box-shadow: 5px 10px 10px #eef5ee;\n    height: 120px;\n}\n\n.image-item {\n    object-fit: contain;\n    width: 100%;\n    height: 100%;\n    cursor: pointer;\n}\n\n.unmatched {\n    background-color: red;\n}\n\n#board {\n    justify-content: center;\n}\n\n#reset {\n    text-align: center;\n}\n", "",{"version":3,"sources":["webpack://./src/frontend/style.css"],"names":[],"mappings":"AAAA;IACI,sBAAsB;IACtB,kBAAkB;IAClB,iCAAiC;IACjC,aAAa;AACjB;;AAEA;IACI,mBAAmB;IACnB,WAAW;IACX,YAAY;IACZ,eAAe;AACnB;;AAEA;IACI,qBAAqB;AACzB;;AAEA;IACI,uBAAuB;AAC3B;;AAEA;IACI,kBAAkB;AACtB","sourcesContent":[".gameItem {\n    border: 1px solid #ddd;\n    border-radius: 5px;\n    box-shadow: 5px 10px 10px #eef5ee;\n    height: 120px;\n}\n\n.image-item {\n    object-fit: contain;\n    width: 100%;\n    height: 100%;\n    cursor: pointer;\n}\n\n.unmatched {\n    background-color: red;\n}\n\n#board {\n    justify-content: center;\n}\n\n#reset {\n    text-align: center;\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -76,16 +76,16 @@ const rootElement = document.querySelector("#app");
 let gameApp = null;
 if (rootElement) {
     gameApp = new _controllers_GameController__WEBPACK_IMPORTED_MODULE_0__.GameController([
-        new _models_GameItem__WEBPACK_IMPORTED_MODULE_1__.GameItem(1, "", "1.jpeg"),
-        new _models_GameItem__WEBPACK_IMPORTED_MODULE_1__.GameItem(2, "", "2.jpg"),
-        new _models_GameItem__WEBPACK_IMPORTED_MODULE_1__.GameItem(3, "", "3.webp"),
-        new _models_GameItem__WEBPACK_IMPORTED_MODULE_1__.GameItem(4, "", "4.webp"),
+        new _models_GameItem__WEBPACK_IMPORTED_MODULE_1__.GameItem(1, "", "1.png"),
+        new _models_GameItem__WEBPACK_IMPORTED_MODULE_1__.GameItem(2, "", "2.png"),
+        new _models_GameItem__WEBPACK_IMPORTED_MODULE_1__.GameItem(3, "", "3.png"),
+        new _models_GameItem__WEBPACK_IMPORTED_MODULE_1__.GameItem(4, "", "4.png"),
         new _models_GameItem__WEBPACK_IMPORTED_MODULE_1__.GameItem(5, "", "5.png"),
-        new _models_GameItem__WEBPACK_IMPORTED_MODULE_1__.GameItem(6, "", "6.jpg"),
-        new _models_GameItem__WEBPACK_IMPORTED_MODULE_1__.GameItem(7, "", "7.jpg"),
-        new _models_GameItem__WEBPACK_IMPORTED_MODULE_1__.GameItem(8, "", "8.jpg"),
+        new _models_GameItem__WEBPACK_IMPORTED_MODULE_1__.GameItem(6, "", "6.png"),
+        new _models_GameItem__WEBPACK_IMPORTED_MODULE_1__.GameItem(7, "", "7.png"),
+        new _models_GameItem__WEBPACK_IMPORTED_MODULE_1__.GameItem(8, "", "8.png"),
         new _models_GameItem__WEBPACK_IMPORTED_MODULE_1__.GameItem(9, "", "9.png"),
-        new _models_GameItem__WEBPACK_IMPORTED_MODULE_1__.GameItem(10, "", "10.jpeg"),
+        new _models_GameItem__WEBPACK_IMPORTED_MODULE_1__.GameItem(10, "", "10.png"),
     ], rootElement);
     gameApp.renderGameBoard();
 }
@@ -136,24 +136,38 @@ class GameController {
             id++;
         });
     }
-    reinitGame() { }
-    // isWinGame(): boolean {}
+    reinitGame() {
+        this.items.forEach((item) => {
+            item.imageElement = null;
+            item.status = _models_GameItem__WEBPACK_IMPORTED_MODULE_2__.GameItemStatus.Close;
+            item.isMatched = false;
+        });
+        this.shuffle();
+    }
+    isWinGame() {
+        return this.items.filter((item) => item.status === _models_GameItem__WEBPACK_IMPORTED_MODULE_2__.GameItemStatus.Open).length === this.items.length;
+    }
     renderHTML(rootElement, item) {
         // <div class="col-2 gameItem m-2 p-1 text-center">
         //      <img class="img-fluid" src="" alt="" />
         // </div>
         const divItem = document.createElement("div");
-        divItem.className = "col-2 gameItem p-4 m-1 text-center";
+        divItem.className = "col-2 gameItem p-2 m-1 text-center";
         divItem.id = item.divId;
         divItem.addEventListener("click", this.processGameItemClicked);
         const imgItem = document.createElement("img");
         imgItem.src = `images/${item.image}`;
-        imgItem.className = "img-fluid visible image-item";
+        imgItem.className = "img-fluid invisible image-item";
         item.imageElement = imgItem;
         divItem.appendChild(imgItem);
         rootElement.appendChild(divItem);
     }
-    renderResetButton(rootElement) { }
+    renderResetButton(rootElement) {
+        let button = rootElement.querySelector("button#reset");
+        if (button) {
+            button.addEventListener("click", this.processResetButtonClicked);
+        }
+    }
     renderGameBoard() {
         this.shuffle();
         let boardDiv = this.element.querySelector("#board");
@@ -164,10 +178,71 @@ class GameController {
         }
         this.renderResetButton(this.element);
     }
-    // isMatched(id: number, imgElement: HTMLImageElement): boolean {}
-    changeMatchedBackground(imgElement, isMatched = true) { }
-    processGameItemClicked(event) { }
-    processResetButtonClicked(event) { }
+    isMatched(id, imgElement) {
+        let openedItems = this.items.filter((item) => {
+            if (item.status === _models_GameItem__WEBPACK_IMPORTED_MODULE_2__.GameItemStatus.Open && !item.isMatched) {
+                return item;
+            }
+        });
+        if (openedItems.length === 2) {
+            let checkMatchedFilter = openedItems.filter((item) => item.id == id);
+            if (checkMatchedFilter.length < 2) {
+                openedItems.forEach((item) => {
+                    this.changeMatchedBackground(item.imageElement, false);
+                });
+                setTimeout(() => {
+                    openedItems.forEach((item) => {
+                        if (item.imageElement) {
+                            item.imageElement.className = "img-fluid invisible";
+                            item.status = _models_GameItem__WEBPACK_IMPORTED_MODULE_2__.GameItemStatus.Close;
+                            item.isMatched = false;
+                            this.changeMatchedBackground(item.imageElement);
+                        }
+                    });
+                }, 600);
+            }
+            else {
+                openedItems.forEach((item) => {
+                    item.isMatched = true;
+                    this.changeMatchedBackground(item.imageElement);
+                });
+                return true;
+            }
+        }
+        return false;
+    }
+    changeMatchedBackground(imgElement, isMatched = true) {
+        if (imgElement === null || imgElement === void 0 ? void 0 : imgElement.parentElement) {
+            if (isMatched) {
+                imgElement.parentElement.className = "col-2 gameItem m-1 p-1 text-center";
+            }
+            else {
+                imgElement.parentElement.className = "col-2 gameItem m-1 p-1 text-center unmatched";
+            }
+        }
+    }
+    processGameItemClicked(event) {
+        let element = event.target;
+        if (element.tagName === "img") {
+            element = element.parentElement;
+        }
+        for (const item of this.items) {
+            if (item.divId === (element === null || element === void 0 ? void 0 : element.id) && !item.isMatched && item.status === _models_GameItem__WEBPACK_IMPORTED_MODULE_2__.GameItemStatus.Close) {
+                item.status = _models_GameItem__WEBPACK_IMPORTED_MODULE_2__.GameItemStatus.Open;
+                let imgElement = element.querySelector("img");
+                if (imgElement) {
+                    imgElement.className = "img-fluid visible";
+                    this.isMatched(item.id, imgElement);
+                }
+            }
+        }
+    }
+    processResetButtonClicked(event) {
+        this.reinitGame();
+        const boardElement = document.querySelector("#board");
+        boardElement.innerHTML = "";
+        this.renderGameBoard();
+    }
     shuffle() {
         this.items = lodash__WEBPACK_IMPORTED_MODULE_1___default().shuffle(this.items);
     }
@@ -203,12 +278,6 @@ var GameItemStatus;
 })(GameItemStatus || (GameItemStatus = {}));
 class GameItem {
     constructor(id, divId, image, status = GameItemStatus.Close, isMatched = false, imageElement = null) {
-        this.id = id;
-        this.divId = divId;
-        this.image = image;
-        this.status = status;
-        this.isMatched = isMatched;
-        this.imageElement = imageElement;
         this.id = id;
         this.divId = divId;
         this.image = image;
