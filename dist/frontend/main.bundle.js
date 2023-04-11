@@ -23,7 +23,7 @@
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".gameItem {\n    border: 1px solid #ddd;\n    border-radius: 5px;\n    box-shadow: 5px 10px 10px #eef5ee;\n    height: 120px;\n}\n\n.image-item {\n    object-fit: contain;\n    width: 100%;\n    height: 100%;\n    cursor: pointer;\n}\n\n.unmatched {\n    background-color: red;\n}\n\n#board {\n    justify-content: center;\n}\n\n#reset {\n    text-align: center;\n}\n", "",{"version":3,"sources":["webpack://./src/frontend/style.css"],"names":[],"mappings":"AAAA;IACI,sBAAsB;IACtB,kBAAkB;IAClB,iCAAiC;IACjC,aAAa;AACjB;;AAEA;IACI,mBAAmB;IACnB,WAAW;IACX,YAAY;IACZ,eAAe;AACnB;;AAEA;IACI,qBAAqB;AACzB;;AAEA;IACI,uBAAuB;AAC3B;;AAEA;IACI,kBAAkB;AACtB","sourcesContent":[".gameItem {\n    border: 1px solid #ddd;\n    border-radius: 5px;\n    box-shadow: 5px 10px 10px #eef5ee;\n    height: 120px;\n}\n\n.image-item {\n    object-fit: contain;\n    width: 100%;\n    height: 100%;\n    cursor: pointer;\n}\n\n.unmatched {\n    background-color: red;\n}\n\n#board {\n    justify-content: center;\n}\n\n#reset {\n    text-align: center;\n}\n"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, ".gameItem {\n    border: 1px solid #ddd;\n    border-radius: 5px;\n    box-shadow: 5px 10px 10px #eef5ee;\n    height: 120px;\n    background-color: #fff;\n}\n\n.image-item {\n    object-fit: contain;\n    width: 100%;\n    height: 100%;\n    cursor: pointer;\n}\n\n.unmatched {\n    background-color: red;\n}\n\n#board {\n    justify-content: center;\n}\n\n#reset {\n    text-align: center;\n}\n", "",{"version":3,"sources":["webpack://./src/frontend/style.css"],"names":[],"mappings":"AAAA;IACI,sBAAsB;IACtB,kBAAkB;IAClB,iCAAiC;IACjC,aAAa;IACb,sBAAsB;AAC1B;;AAEA;IACI,mBAAmB;IACnB,WAAW;IACX,YAAY;IACZ,eAAe;AACnB;;AAEA;IACI,qBAAqB;AACzB;;AAEA;IACI,uBAAuB;AAC3B;;AAEA;IACI,kBAAkB;AACtB","sourcesContent":[".gameItem {\n    border: 1px solid #ddd;\n    border-radius: 5px;\n    box-shadow: 5px 10px 10px #eef5ee;\n    height: 120px;\n    background-color: #fff;\n}\n\n.image-item {\n    object-fit: contain;\n    width: 100%;\n    height: 100%;\n    cursor: pointer;\n}\n\n.unmatched {\n    background-color: red;\n}\n\n#board {\n    justify-content: center;\n}\n\n#reset {\n    text-align: center;\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -145,6 +145,7 @@ class GameController {
         this.shuffle();
     }
     isWinGame() {
+        alert("Bạn đã thắng game này :)");
         return this.items.filter((item) => item.status === _models_GameItem__WEBPACK_IMPORTED_MODULE_2__.GameItemStatus.Open).length === this.items.length;
     }
     renderHTML(rootElement, item) {
